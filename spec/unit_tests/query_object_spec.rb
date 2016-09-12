@@ -15,4 +15,14 @@ describe QueryObject do
     end
   end
 
+  describe '#get_object' do
+    it 'returns the first object from a pattern' do
+      subject = RDF::URI.new("http://id.test.com/123")
+      predicate = Parl.indexed
+      graph = RDF::Graph.new << RDF::Statement(subject, predicate, 'indexed')
+      object = extended_class.get_object(graph, subject, predicate)
+      expect(object).to eq 'indexed'
+    end
+  end
+
 end

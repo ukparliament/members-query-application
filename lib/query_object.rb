@@ -9,4 +9,12 @@ module QueryObject
     uri.to_s.split("/").last
   end
 
+  def get_object(graph, subject, predicate)
+    pattern = RDF::Query::Pattern.new(
+        subject,
+        predicate,
+        :object)
+    graph.first_object(pattern)
+  end
+
 end
