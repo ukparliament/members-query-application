@@ -1,4 +1,4 @@
-IMAGE = ukpds/members-prototype
+IMAGE = ukpds/members-query
 
 # GO_PIPELINE_COUNTER is the pipeline number, passed from our build agent.
 GO_PIPELINE_COUNTER?="unknown"
@@ -9,7 +9,7 @@ VERSION=0.1.$(GO_PIPELINE_COUNTER)
 
 # ECS-related
 ECS_CLUSTER = ci
-ECS_APP_NAME = MembersPrototype
+ECS_APP_NAME = MembersQuery
 AWS_REGION = eu-west-1
 
 build :
@@ -49,7 +49,7 @@ deploy-ci:
 
 # http://serverfault.com/questions/682340/update-the-container-of-a-service-in-amazon-ecs?rq=1
 deploy-ecs-ci:
-	aws ecs register-task-definition --cli-input-json file://./aws_ecs/members-prototype.json
+	aws ecs register-task-definition --cli-input-json file://./aws_ecs/members-query.json
 	aws ecs update-service --service $(ECS_APP_NAME) --cluster $(ECS_CLUSTER) --region $(AWS_REGION) --task-definition $(ECS_APP_NAME)
 
 scale-ci:

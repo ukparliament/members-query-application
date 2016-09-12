@@ -1,10 +1,10 @@
 {
   "containerDefinitions": [
     {
-      "name": "MembersPrototype",
-      "image": "ukpds/members-prototype",
+      "name": "MembersQuery",
+      "image": "ukpds/members-query",
       "cpu": 10,
-      "memory": 512,
+      "memory": 256,
       "essential": true,
       "command": [],
       "portMappings": [
@@ -17,11 +17,11 @@
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "MembersPrototype",
+          "awslogs-group": "MembersQuery",
           "awslogs-region": "eu-west-1"
         }
       }
     }
   ],
-  "family": "MembersPrototype"
+  "family": "MembersQuery"
 }
