@@ -17,4 +17,13 @@ module QueryObject
     graph.first_object(pattern)
   end
 
+  def map_people(statements)
+    statements.map do |statement|
+      {
+          id: get_id(statement.subject),
+          name: statement.object.to_s
+      }
+    end
+  end
+
 end

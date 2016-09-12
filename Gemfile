@@ -16,14 +16,16 @@ end
 group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'web-console'
 end
 
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'webmock'
 end
 
 # Gems required for Docker containers
 gem 'passenger'
 gem 'therubyracer'
-gem 'web-console'
+

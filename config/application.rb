@@ -22,7 +22,6 @@ Bundler.require(*Rails.groups)
 module MembersQueryApplication
   class Application < Rails::Application
 
-    config.web_console.whiny_requests = false
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 

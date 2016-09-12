@@ -2,6 +2,8 @@ require 'spec_helper'
 require 'vocabulary'
 require 'query_object'
 require 'rdf'
+require 'test_stubs/member_statements'
+
 include Vocabulary
 
 describe QueryObject do
@@ -22,6 +24,18 @@ describe QueryObject do
       graph = RDF::Graph.new << RDF::Statement(subject, predicate, 'indexed')
       object = extended_class.get_object(graph, subject, predicate)
       expect(object).to eq 'indexed'
+    end
+  end
+
+  describe '#map_people' do
+    it 'returns an of hashes each containing the properties of a person' do
+      statements = MEMBER_STATEMENTS
+      people = extended_class.map_people(statements)
+      first_person_hash = {
+          id: '1',
+          name: 'Member1'
+      }
+      expect(people.first).to eq first_person_hash
     end
   end
 
