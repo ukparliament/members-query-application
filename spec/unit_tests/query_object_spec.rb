@@ -1,8 +1,7 @@
 require 'spec_helper'
-require 'vocabulary'
 require 'query_object'
-require 'rdf'
 require 'test_stubs/member_statements'
+require 'test_stubs/house_statements'
 
 include Vocabulary
 
@@ -28,14 +27,39 @@ describe QueryObject do
   end
 
   describe '#map_people' do
-    it 'returns an of hashes each containing the properties of a person' do
-      statements = MEMBER_STATEMENTS
-      people = extended_class.map_people(statements)
-      first_person_hash = {
-          id: '1',
-          name: 'Member1'
-      }
-      expect(people.first).to eq first_person_hash
+    it 'returns an array of hashes each containing the properties of a person' do
+      graph = RDF::Graph.new
+      MEMBER_STATEMENTS.each do |statement|
+        graph << statement
+      end
+      people = extended_class.map_people(graph)
+
+      expect(people).to eq MEMBER_ARRAY
+    end
+  end
+
+  describe '#map_house' do
+    it 'returns an array of hashes each containing the properties of a house' do
+      graph = RDF::Graph.new
+      HOUSE_STATEMENTS.each do |statement|
+        graph << statement
+      end
+      houses = extended_class.map_houses(graph)
+
+      expect(houses).to eq HOUSE_ARRAY
+    end
+  end
+
+  describe '#single_statement_mapper' do
+    it 'returns an array of hashes each containing the id and a property for the given graph and pattern' do
+      graph = RDF::Graph.new
+      HOUSE_STATEMENTS.each do |statement|
+        graph << statement
+      end
+      houses = extended_class.single_statement_mapper(graph, Rdfs.label, :label)
+
+      expect(houses).to eq HOUSE_ARRAY
+
     end
   end
 

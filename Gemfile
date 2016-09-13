@@ -11,6 +11,7 @@ gem 'sparql'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'webmock'
 end
 
 group :development do
@@ -22,7 +23,6 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'webmock'
 end
 
 # Gems required for Docker containers
