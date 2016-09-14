@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require 'query_object'
 require 'test_stubs/person_statements'
 require 'test_stubs/house_statements'
