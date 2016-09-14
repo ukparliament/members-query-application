@@ -12,8 +12,8 @@ require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 #Triple store connection
-DATABASE = 'http://graphdbtest.eastus.cloudapp.azure.com/repositories/DataDriven06'
-
+# DATABASE = 'http://graphdbtest.eastus.cloudapp.azure.com/repositories/DataDriven06'
+DATABASE = 'http://13.95.91.76/repositories/DataDriven'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -22,7 +22,6 @@ Bundler.require(*Rails.groups)
 module MembersQueryApplication
   class Application < Rails::Application
 
-    config.web_console.whiny_requests = false
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 

@@ -1,7 +1,8 @@
 require 'spec_helper'
-require 'vocabulary'
 require 'query_object'
-require 'rdf'
+require 'test_stubs/person_statements'
+require 'test_stubs/house_statements'
+
 include Vocabulary
 
 describe QueryObject do
@@ -23,6 +24,43 @@ describe QueryObject do
       object = extended_class.get_object(graph, subject, predicate)
       expect(object).to eq 'indexed'
     end
+  end
+
+  describe '#map_people' do
+    it 'returns an array of hashes each containing the properties of a person' do
+      graph = RDF::Graph.new
+      PERSON_STATEMENTS.each do |statement|
+        graph << statement
+      end
+      people = extended_class.map_people(graph)
+
+      expect(people).to eq PERSON_ARRAY
+    end
+  end
+
+  describe '#map_house' do
+    it 'returns an array of hashes each containing the properties of a house' do
+      graph = RDF::Graph.new
+      HOUSE_STATEMENTS.each do |statement|
+        graph << statement
+      end
+      houses = extended_class.map_houses(graph)
+
+      expect(houses).to eq HOUSE_ARRAY
+    end
+  end
+
+  describe '#single_statement_mapper' do
+    it 'returns an array of hashes each containing the id and a property for the given graph (for statements of same subject type) and pattern' do
+      graph = RDF::Graph.new
+      HOUSE_STATEMENTS.each do |statement|
+        graph << statement
+      end
+      houses = extended_class.single_statement_mapper(graph, Rdfs.label, :label)
+
+      expect(houses).to eq HOUSE_ARRAY
+    end
+
   end
 
 end
