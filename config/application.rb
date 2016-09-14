@@ -13,7 +13,7 @@ require "sprockets/railtie"
 
 #Triple store connection
 # DATABASE = 'http://graphdbtest.eastus.cloudapp.azure.com/repositories/DataDriven06'
-DATABASE = '13.95.91.76/DataDriven'
+DATABASE = 'http://13.95.91.76/repositories/DataDriven'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
