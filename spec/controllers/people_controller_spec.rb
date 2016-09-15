@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe 'PeopleController', :type => :controller do
   describe "GET index" do
     it 'can render data in json format' do
-      # @controller = PeopleController.new
-      get 'index', :format => :json
+      @controller = PeopleController.new
+      allow(PersonQueryObject).to receive(:all).and_return({graph: PEOPLE_GRAPH, hierarchy: PEOPLE_HASH })
+      get 'index'
 
       body = JSON.parse(response.body)
 

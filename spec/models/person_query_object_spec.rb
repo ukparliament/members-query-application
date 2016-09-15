@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'test_stubs/person_statements'
 
 describe 'PersonQueryObject' do
   describe '#all' do
