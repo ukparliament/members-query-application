@@ -44,5 +44,4 @@ RSpec.describe 'PeopleController', :type => :controller do
     end
   end
 
-  #further tests to check formats - xml, rdf and html (which should not render) will follow
 end
