@@ -4,6 +4,7 @@ RSpec.describe 'PeopleController', :type => :controller do
   let(:json) { JSON.parse(response.body) }
   let(:xml) { Nokogiri::XML(response.body) }
   let(:rdf) { RDF::NTriples::Reader.new(response.body) }
+
   describe "GET index" do
     before(:each) do
       @controller = PeopleController.new
@@ -36,6 +37,13 @@ RSpec.describe 'PeopleController', :type => :controller do
 
     it 'can does not render data in html format' do
       expect{ get 'index', format: :html }.to raise_error(ActionController::UnknownFormat)
+    end
+  end
+
+  describe "GET show" do
+    before(:each) do
+      @controller = PeopleController.new
+      allow(PersonQueryObject).to receive(:find).with('http://id.ukpds.org/member/1').and_return({graph: PERSON_ONE_GRAPH, hierarchy: PEOPLE_HASH })
     end
   end
 
