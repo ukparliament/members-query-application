@@ -11,6 +11,9 @@ PERSON_STATEMENTS.each do |statement|
     PEOPLE_GRAPH << statement
 end
 
+PERSON_ONE_GRAPH = RDF::Graph.new
+PERSON_ONE_GRAPH << PERSON_STATEMENTS[0]
+
 PEOPLE_HASH = { people: [
     { id: '1',
       name: 'Member1'
@@ -26,5 +29,11 @@ PEOPLE_HASH = { people: [
     },
     { id: '5',
       name: 'Member5'
+    }
+] }
+
+PERSON_ONE_HASH = { people: [
+    { id: '1',
+      name: 'Member1'
     }
 ] }
