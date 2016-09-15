@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'PeopleController', :type => :controller do
+  let(:json) { JSON.parse(response.body) }
+  let(:xml) { Nokogiri::XML(response.body) }
+  let(:rdf) { RDF::NTriples::Reader.new(response.body) }
   describe "GET index" do
-    let(:json) { JSON.parse(response.body) }
-    let(:xml) { Nokogiri::XML(response.body) }
-    let(:rdf) { RDF::NTriples::Reader.new(response.body) }
     before(:each) do
       @controller = PeopleController.new
       allow(PersonQueryObject).to receive(:all).and_return({graph: PEOPLE_GRAPH, hierarchy: PEOPLE_HASH })
