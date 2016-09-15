@@ -26,15 +26,18 @@ RSpec.describe 'PeopleController', :type => :controller do
     it 'can render data in rdf format' do
       get 'index', format: :rdf
 
+      first_statement = nil
+      RDF::NTriples::Reader.new(response.body) do |reader|
+        first_statement = reader.first
+      end
+      expected_statement = RDF::Statement(RDF::URI.new("http://id.ukpds.org/member/1"), Schema.name, "Member1")
       expect(response.status).to eq 200
       expect(response.content_type).to eq 'application/rdf+xml'
+      expect(first_statement).to eq expected_statement
     end
 
     it 'can does not render data in html format' do
-      get 'index', format: :html
-
-      #we need to think about the required behaviour here - at the moment it gives and unknown format error
-      expect(response.status).to eq 'not sure yet'
+      expect{ get 'index', format: :html }.to raise_error(ActionController::UnknownFormat)
     end
   end
 
