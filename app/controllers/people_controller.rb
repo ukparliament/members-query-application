@@ -1,13 +1,14 @@
 class PeopleController < ApplicationController
   include FormatHelper
+  include IdToUriConverterHelper
 
   def index
-    data = Person.all
+    data = PersonQueryObject.all
     format(data)
   end
 
   def show
-    data = Person.find(params[:id])
+    data = PersonQueryObject.find(params[:id])
     format(data)
   end
 
