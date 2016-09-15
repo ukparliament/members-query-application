@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   include FormatHelper
+  include IdToUriConverterHelper
 
   def index
     data = PersonQueryObject.all
