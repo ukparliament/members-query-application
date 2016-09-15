@@ -8,7 +8,8 @@ class PeopleController < ApplicationController
   end
 
   def show
-    data = PersonQueryObject.find(params[:id])
+    uri = convert_id_to_resource_uri(params[:id])
+    data = PersonQueryObject.find(uri)
     format(data)
   end
 
