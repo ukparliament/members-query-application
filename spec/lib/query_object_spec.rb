@@ -34,7 +34,7 @@ describe QueryObject do
       end
       people = extended_class.map_people(graph)
 
-      expect(people).to eq PERSON_ARRAY
+      expect(people).to eq PEOPLE_HASH[:people]
     end
   end
 

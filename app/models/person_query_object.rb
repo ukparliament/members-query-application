@@ -14,7 +14,7 @@ class PersonQueryObject
 					schema:name ?name .
 			}')
 
-    people = self.single_statement_mapper(graph, Schema.name, :name)
+    people = self.single_statement_mapper(result, Schema.name, :name)
 
     hierarchy = {
         people: people
@@ -42,7 +42,7 @@ class PersonQueryObject
 
     # keeping the two lines above as a reminder of how this could work when there is more data
 
-    people = self.single_statement_mapper(graph, Schema.name, :name)
+    people = self.single_statement_mapper(result, Schema.name, :name)
 
     hierarchy = {
         people: people

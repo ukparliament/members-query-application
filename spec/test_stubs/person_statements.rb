@@ -6,7 +6,12 @@ PERSON_STATEMENTS = [
     RDF::Statement.new(RDF::URI.new('http://id.ukpds.org/member/5'), RDF::URI.new('http://schema.org/name'), 'Member5'),
 ]
 
-PERSON_ARRAY = [
+PEOPLE_GRAPH = RDF::Graph.new
+PERSON_STATEMENTS.each do |statement|
+    PEOPLE_GRAPH << statement
+end
+
+PEOPLE_HASH = { people: [
     { id: '1',
       name: 'Member1'
     },
@@ -22,4 +27,4 @@ PERSON_ARRAY = [
     { id: '5',
       name: 'Member5'
     }
-]
+] }
