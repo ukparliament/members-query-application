@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'PeopleController', :type => :controller do
   describe "GET index" do
+    let(:json) { JSON.parse(response.body) }
+    let(:xml) { Nokogiri::XML(response.body) }
+    let(:rdf) { RDF::NTriples::Reader.new(response.body) }
     before(:each) do
       @controller = PeopleController.new
       allow(PersonQueryObject).to receive(:all).and_return({graph: PEOPLE_GRAPH, hierarchy: PEOPLE_HASH })
@@ -9,34 +12,26 @@ RSpec.describe 'PeopleController', :type => :controller do
 
     it 'can render data in json format' do
       get 'index', format: :json
-      body = JSON.parse(response.body)
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq 'application/json'
-      expect(body["people"][0]["id"]).to eq '1'
+      expect(json["people"][0]["id"]).to eq '1'
     end
 
     it 'can render data in xml format' do
       get 'index', format: :xml
 
-      body = Nokogiri::XML(response.body)
-
       expect(response.status).to eq 200
       expect(response.content_type).to eq 'application/xml'
-      expect(body.xpath("//person")[0].children.children[0].content).to eq '1'
+      expect(xml.xpath("//person")[0].children.children[0].content).to eq '1'
     end
 
     it 'can render data in rdf format' do
       get 'index', format: :rdf
 
-      first_statement = nil
-      RDF::NTriples::Reader.new(response.body) do |reader|
-        first_statement = reader.first
-      end
-      expected_statement = RDF::Statement(RDF::URI.new("http://id.ukpds.org/member/1"), Schema.name, "Member1")
       expect(response.status).to eq 200
       expect(response.content_type).to eq 'application/rdf+xml'
-      expect(first_statement).to eq expected_statement
+      expect(rdf.first).to eq PERSON_STATEMENTS[0]
     end
 
     it 'can does not render data in html format' do
