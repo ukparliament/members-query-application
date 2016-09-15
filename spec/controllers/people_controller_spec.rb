@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'PeopleController', :type => :controller do
-  xdescribe "GET index" do
+  describe "GET index" do
     it 'can render data in json format' do
       get 'index', :format => :json
 
