@@ -19,8 +19,11 @@ RSpec.describe 'PeopleController', :type => :controller do
     it 'can render data in xml format' do
       get 'index', format: :xml
 
+      body = Nokogiri::XML(response.body)
+
       expect(response.status).to eq 200
       expect(response.content_type).to eq 'application/xml'
+      expect(body.xpath("//person")[0].children.children[0].content).to eq '1'
     end
 
     it 'can render data in rdf format' do
