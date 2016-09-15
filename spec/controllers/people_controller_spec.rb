@@ -5,38 +5,70 @@ RSpec.describe 'PeopleController', :type => :controller do
   let(:xml) { Nokogiri::XML(response.body) }
   let(:rdf) { RDF::NTriples::Reader.new(response.body) }
 
-  describe "GET index" do
+  describe 'GET index' do
     before(:each) do
       @controller = PeopleController.new
       allow(PersonQueryObject).to receive(:all).and_return({graph: PEOPLE_GRAPH, hierarchy: PEOPLE_HASH })
     end
 
-    it 'can render data in json format' do
-      get 'index', format: :json
+    context 'when the requested format is JSON' do
+      before(:each) do
+        get 'index', format: :json
+      end
+      it 'returns OK reponse with correct format' do
+        expect(response.status).to eq 200
+        expect(response.content_type).to eq 'application/json'
+      end
 
-      expect(response.status).to eq 200
-      expect(response.content_type).to eq 'application/json'
-      expect(json["people"][1]["id"]).to eq '2'
+      it 'returns the correct number of people in the graph' do
+        expect(json['people'].length).to eq 5
+      end
+
+      it 'returns the correct id for the second person' do
+        expect(json['people'][1]['id']).to eq '2'
+      end
     end
 
-    it 'can render data in xml format' do
-      get 'index', format: :xml
+    context 'when the requested format is XML' do
+      before(:each) do
+        get 'index', format: :xml
+      end
+      it 'returns OK reponse with correct format' do
+        expect(response.status).to eq 200
+        expect(response.content_type).to eq 'application/xml'
+      end
 
-      expect(response.status).to eq 200
-      expect(response.content_type).to eq 'application/xml'
-      expect(xml.xpath("//person")[1].children.children[0].content).to eq '2'
+      it 'returns the correct number of people in the graph' do
+        expect(xml.xpath('//person').count).to eq 5
+      end
+
+      it 'returns the correct id for the second person' do
+        expect(xml.xpath('//person')[1].children.children[0].content).to eq '2'
+      end
     end
 
-    it 'can render data in rdf format' do
-      get 'index', format: :rdf
+    context 'when the requested format is RDF' do
+      before(:each) do
+        get 'index', format: :rdf
+      end
+      it 'returns OK reponse with correct format' do
+        expect(response.status).to eq 200
+        expect(response.content_type).to eq 'application/rdf+xml'
+      end
 
-      expect(response.status).to eq 200
-      expect(response.content_type).to eq 'application/rdf+xml'
-      expect(rdf.first).to eq PERSON_STATEMENTS[0]
+      it 'returns the correct number of people in the graph' do
+        expect(rdf.count).to eq 5
+      end
+
+      it 'returns the correct data for the first person' do
+        expect(rdf.first).to eq PERSON_STATEMENTS[0]
+      end
     end
 
-    it 'can does not render data in html format' do
-      expect{ get 'index', format: :html }.to raise_error(ActionController::UnknownFormat)
+    context 'when the requested format is HTML' do
+      it 'raises an unknown format error' do
+        expect{ get 'index', format: :html }.to raise_error(ActionController::UnknownFormat)
+      end
     end
   end
 
