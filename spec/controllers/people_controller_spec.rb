@@ -3,7 +3,7 @@ require 'rails_helper'
 describe PeopleController do
   let(:json) { JSON.parse(response.body) }
   let(:xml) { Nokogiri::XML(response.body) }
-  let(:rdf) { RDF::NTriples::Reader.new(response.body) }
+  let(:ttl) { RDF::NTriples::Reader.new(response.body) }
 
   describe 'GET index' do
     before(:each) do
@@ -46,21 +46,21 @@ describe PeopleController do
       end
     end
 
-    context 'when the requested format is RDF' do
+    context 'when the requested format is TTL' do
       before(:each) do
-        get 'index', format: :rdf
+        get 'index', format: :ttl
       end
       it 'returns OK reponse with correct format' do
         expect(response.status).to eq 200
-        expect(response.content_type).to eq 'application/rdf+xml'
+        expect(response.content_type).to eq 'text/turtle'
       end
 
       it 'returns the correct number of people in the graph' do
-        expect(rdf.count).to eq 5
+        expect(ttl.count).to eq 5
       end
 
       it 'returns the correct data for the first person' do
-        expect(rdf.first).to eq PERSON_STATEMENTS[0]
+        expect(ttl.first).to eq PERSON_STATEMENTS[0]
       end
     end
 
@@ -112,21 +112,21 @@ describe PeopleController do
       end
     end
 
-    context 'when the requested format is RDF' do
+    context 'when the requested format is TTL' do
       before(:each) do
-        get 'show', id: 'members/1', format: :rdf
+        get 'show', id: 'members/1', format: :ttl
       end
       it 'returns OK reponse with correct format' do
         expect(response.status).to eq 200
-        expect(response.content_type).to eq 'application/rdf+xml'
+        expect(response.content_type).to eq 'text/turtle'
       end
 
       it 'returns only one person in the graph' do
-        expect(rdf.count).to eq 1
+        expect(ttl.count).to eq 1
       end
 
       it 'returns the correct data for the person' do
-        expect(rdf.first).to eq PERSON_STATEMENTS[0]
+        expect(ttl.first).to eq PERSON_STATEMENTS[0]
       end
     end
 
