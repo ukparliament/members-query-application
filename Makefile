@@ -1,4 +1,4 @@
-IMAGE = ukpds/members-query
+IMAGE = 165162103257.dkr.ecr.eu-west-1.amazonaws.com/membersquery
 
 # GO_PIPELINE_COUNTER is the pipeline number, passed from our build agent.
 GO_PIPELINE_COUNTER?="unknown"
