@@ -1,4 +1,5 @@
 class PersonQueryObject
+  include Vocabulary
   extend QueryObject
 
   def self.all
@@ -31,7 +32,7 @@ class PersonQueryObject
 					schema:name ?name .
 			}
 			WHERE {
-				?person
+				<#{uri}>
 					a schema:Person ;
 					schema:name ?name .
 			}
