@@ -35,8 +35,7 @@ class PersonQueryObject
 				<#{uri}>
 					a schema:Person ;
 					schema:name ?name .
-			}
-    ")
+			}")
 
     # person[:house] = self.single_statement_mapper(graph, Rdfs.label, :label)
     # person[:constituency] = self.single_statement_mapper(graph, Parl.constituencyLabel, :label)

@@ -23,6 +23,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'simplecov', require: false
 end
 
 # Gems required for Docker containers
