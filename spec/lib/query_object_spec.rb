@@ -3,8 +3,6 @@ require 'query_object'
 require 'test_stubs/person_statements'
 require 'test_stubs/house_statements'
 
-include Vocabulary
-
 describe QueryObject do
   let(:extended_class) { Class.new { extend QueryObject }}
 
@@ -19,7 +17,7 @@ describe QueryObject do
   describe '#get_object' do
     it 'returns the first object from a pattern' do
       subject = RDF::URI.new("http://id.test.com/123")
-      predicate = Parl.indexed
+      predicate = Vocabulary::Parl.indexed
       graph = RDF::Graph.new << RDF::Statement(subject, predicate, 'indexed')
       object = extended_class.get_object(graph, subject, predicate)
       expect(object).to eq 'indexed'
@@ -56,7 +54,7 @@ describe QueryObject do
       HOUSE_STATEMENTS.each do |statement|
         graph << statement
       end
-      houses = extended_class.single_statement_mapper(graph, Rdfs.label, :label)
+      houses = extended_class.single_statement_mapper(graph, Vocabulary::Rdfs.label, :label)
 
       expect(houses).to eq HOUSE_ARRAY
     end

@@ -3,7 +3,7 @@ module FormatHelper
     respond_to do |format|
       format.any(:xml, :json) { render request.format.to_sym => data[:hierarchy] }
 
-      format.rdf {
+      format.ttl {
         result = ""
         data[:graph].each_statement do |statement|
           result << RDF::NTriples::Writer.serialize(statement)
