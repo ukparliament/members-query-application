@@ -15,7 +15,9 @@
 #
 # The `.rspec` file also contains a few flags that are not defaults but that
 # users commonly want.
-#
+require 'simplecov'
+SimpleCov.start
+
 require 'webmock/rspec'
 
 WebMock.disable_net_connect!(allow_localhost: true)
