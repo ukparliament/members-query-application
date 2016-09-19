@@ -2,7 +2,7 @@
   "containerDefinitions": [
     {
       "name": "MembersQuery",
-      "image": "ukpds/members-query",
+      "image": "165162103257.dkr.ecr.eu-west-1.amazonaws.com/membersquery",
       "cpu": 10,
       "memory": 256,
       "essential": true,
