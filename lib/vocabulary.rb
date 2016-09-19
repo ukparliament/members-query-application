@@ -7,10 +7,6 @@ module Vocabulary
   class Parl
     @@prefix = 'http://data.parliament.uk/schema/parl#'
 
-    def self.constituencyLabel
-      RDF::URI.new("#{@@prefix}constituencyLabel")
-    end
-
     def self.indexed
       RDF::URI.new("#{@@prefix}indexed")
     end
