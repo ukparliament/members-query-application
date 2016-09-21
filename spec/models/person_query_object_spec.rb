@@ -21,7 +21,7 @@ describe 'PersonQueryObject' do
     end
 
     it 'returns a hash containing a hierarchy hash of people' do
-        expect(result_hash[:hierarchy][:people][0..2]).to eq VCR_PEOPLE_ARRAY
+        expect(result_hash[:hierarchy][:people][0..2]).to eq PEOPLE_HASH[:people]
     end
 
     after(:each) do
