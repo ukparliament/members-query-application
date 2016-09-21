@@ -6,6 +6,23 @@ require 'test_stubs/house_statements'
 describe QueryObject do
   let(:extended_class) { Class.new { extend QueryObject }}
 
+  describe '#query' do
+    it 'returns a graph with the houses when the query requests them' do
+      VCR.use_cassette("query_object") do
+        graph = extended_class.query(
+            'PREFIX parl: <http://data.parliament.uk/schema/parl#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            construct {
+                ?house rdfs:label ?label
+            } where {
+              ?house a parl:House ;
+                    rdfs:label ?label .
+            }')
+        expect(graph).to eq HOUSE_GRAPH
+      end
+    end
+  end
+
   describe '#get_id' do
     it 'returns an id from a given uri' do
       uri = RDF::URI.new('http://id.test.com/123')

@@ -20,11 +20,11 @@ describe PeopleController do
       end
 
       it 'returns the correct number of people in the graph' do
-        expect(json['people'].length).to eq 5
+        expect(json['people'].length).to eq 3
       end
 
       it 'returns the correct id for the second person' do
-        expect(json['people'][1]['id']).to eq '2'
+        expect(json['people'][1]['id']).to eq '00003898-0000-0000-0000-000000000001'
       end
     end
 
@@ -38,11 +38,11 @@ describe PeopleController do
       end
 
       it 'returns the correct number of people in the graph' do
-        expect(xml.xpath('//person').count).to eq 5
+        expect(xml.xpath('//person').count).to eq 3
       end
 
       it 'returns the correct id for the second person' do
-        expect(xml.xpath('//person')[1].children.children[0].content).to eq '2'
+        expect(xml.xpath('//person')[1].children.children[0].content).to eq '00003898-0000-0000-0000-000000000001'
       end
     end
 
@@ -56,11 +56,11 @@ describe PeopleController do
       end
 
       it 'returns the correct number of people in the graph' do
-        expect(ttl.count).to eq 5
+        expect(ttl.count).to eq 3
       end
 
       it 'returns the correct data for the first person' do
-        expect(ttl.first).to eq PERSON_STATEMENTS[0]
+        expect(ttl.first).to eq LORD_ABERDARE_STATEMENT
       end
     end
 
@@ -73,7 +73,7 @@ describe PeopleController do
 
   describe "GET show" do
     before(:each) do
-      allow(PersonQueryObject).to receive(:find).with('http://id.ukpds.org/members/1').and_return({graph: PERSON_ONE_GRAPH, hierarchy: PERSON_ONE_HASH })
+      allow(PersonQueryObject).to receive(:find).with('http://id.ukpds.org/members/1').and_return({graph: LORD_ABERDARE_GRAPH, hierarchy: LORD_ABERDARE_HASH })
     end
 
     context 'when the requested format is JSON' do
@@ -90,7 +90,7 @@ describe PeopleController do
       end
 
       it 'returns the correct id for the person' do
-        expect(json['people'][0]['id']).to eq '1'
+        expect(json['people'][0]['id']).to eq '00003468-0000-0000-0000-000000000001'
       end
     end
 
@@ -108,7 +108,7 @@ describe PeopleController do
       end
 
       it 'returns the correct id for the person' do
-        expect(xml.xpath('//person')[0].children.children[0].content).to eq '1'
+        expect(xml.xpath('//person')[0].children.children[0].content).to eq '00003468-0000-0000-0000-000000000001'
       end
     end
 
@@ -126,7 +126,7 @@ describe PeopleController do
       end
 
       it 'returns the correct data for the person' do
-        expect(ttl.first).to eq PERSON_STATEMENTS[0]
+        expect(ttl.first).to eq LORD_ABERDARE_STATEMENT
       end
     end
 
