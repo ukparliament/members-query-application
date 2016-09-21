@@ -207,8 +207,8 @@ DEPENDENCIES
   sparql
   spring
   therubyracer
-  vcr
   turbolinks
+  vcr
   web-console
   webmock
 
