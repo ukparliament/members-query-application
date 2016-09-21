@@ -45,7 +45,7 @@ http_interactions:
       Transfer-Encoding:
       - chunked
       Date:
-      - Wed, 21 Sep 2016 11:24:34 GMT
+      - Wed, 21 Sep 2016 11:58:10 GMT
     body:
       encoding: UTF-8
       string: '<http://id.ukpds.org/00003468-0000-0000-0000-000000000001> <http://schema.org/name>
@@ -53,5 +53,5 @@ http_interactions:
 
 '
     http_version: 
-  recorded_at: Wed, 21 Sep 2016 11:26:11 GMT
+  recorded_at: Wed, 21 Sep 2016 11:59:47 GMT
 recorded_with: VCR 3.0.3
