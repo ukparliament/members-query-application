@@ -1,13 +1,18 @@
 HOUSE_STATEMENTS = [
-    RDF::Statement.new(RDF::URI.new('http://id.ukpds.org/house/1'), RDF::URI.new('http://www.w3.org/2000/01/rdf-schema#label'), 'Commons'),
-    RDF::Statement.new(RDF::URI.new('http://id.ukpds.org/house/2'), RDF::URI.new('http://www.w3.org/2000/01/rdf-schema#label'), 'Lords'),
+    RDF::Statement.new(RDF::URI.new('http://id.ukpds.org/00000000-0001-0000-0000-000000000000'), RDF::URI.new('http://www.w3.org/2000/01/rdf-schema#label'), 'House of Commons'),
+    RDF::Statement.new(RDF::URI.new('http://id.ukpds.org/00000000-0002-0000-0000-000000000000'), RDF::URI.new('http://www.w3.org/2000/01/rdf-schema#label'), 'House of Lords'),
 ]
 
+HOUSE_GRAPH = RDF::Graph.new
+HOUSE_STATEMENTS.each do |statement|
+  HOUSE_GRAPH << statement
+end
+
 HOUSE_ARRAY = [
-    { id: '1',
-      label: 'Commons'
+    { id: '00000000-0001-0000-0000-000000000000',
+      label: 'House of Commons'
     },
-    { id: '2',
-      label: 'Lords'
+    { id: '00000000-0002-0000-0000-000000000000',
+      label: 'House of Lords'
     }
 ]

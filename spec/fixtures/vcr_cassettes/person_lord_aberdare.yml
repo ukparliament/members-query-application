@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://13.95.91.76/repositories/DataDriven
+    body:
+      encoding: US-ASCII
+      string: query=%0A%09%09%09PREFIX+schema%3A+%3Chttp%3A%2F%2Fschema.org%2F%3E%0A%09%09%09CONSTRUCT+%7B%0A%09%09%09%09%3Chttp%3A%2F%2Fid.ukpds.org%2F00003468-0000-0000-0000-000000000001%3E%0A%09%09%09%09%09schema%3Aname+%3Fname+.%0A%09%09%09%7D%0A%09%09%09WHERE+%7B%0A%09%09%09%09%3Chttp%3A%2F%2Fid.ukpds.org%2F00003468-0000-0000-0000-000000000001%3E%0A%09%09%09%09%09a+schema%3APerson+%3B%0A%09%09%09%09%09schema%3Aname+%3Fname+.%0A%09%09%09%7D
+    headers:
+      Accept:
+      - text/turtle, text/rdf+turtle, application/turtle, application/x-turtle, application/n-triples,
+        text/plain, */*;p=0.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - 120
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache-Coyote/1.1
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - no-cache
+      - no-store
+      Vary:
+      - Accept
+      Content-Disposition:
+      - attachment; filename=query-result.nt
+      Content-Type:
+      - application/n-triples;charset=UTF-8
+      Content-Language:
+      - en-US
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Wed, 21 Sep 2016 11:58:10 GMT
+    body:
+      encoding: UTF-8
+      string: '<http://id.ukpds.org/00003468-0000-0000-0000-000000000001> <http://schema.org/name>
+        "Lord Aberdare" .
+
+'
+    http_version: 
+  recorded_at: Wed, 21 Sep 2016 11:59:47 GMT
+recorded_with: VCR 3.0.3

@@ -29,6 +29,7 @@ group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'simplecov', require: false
+  gem 'vcr'
 end
 
 # Gems required for Docker containers
